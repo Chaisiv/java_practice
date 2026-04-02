@@ -12,7 +12,7 @@ jobs:
             - name: Initialize CodeQL
               uses: github/codeql-action/init@v3
               with:
-                language: java
+                languages: java
             - name: pacakge the code 
               run: mvn clean package
             - name: codeql analysis
