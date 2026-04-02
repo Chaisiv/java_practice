@@ -8,11 +8,11 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: get the code
-              uses: action/checkout@v4
+              uses: actions/checkout@v4
             - name: Initialize CodeQL
               uses: github/codeql-action/init@v3
               with:
-                language: java
+                languages: java
             - name: pacakge the code 
               run: mvn clean package
             - name: codeql analysis
