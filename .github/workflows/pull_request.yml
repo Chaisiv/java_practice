@@ -1,0 +1,25 @@
+name: pull_request
+on:
+    pull_request:
+        branches:
+            - dev
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: get the code
+              uses: action/checkout@v4
+            - name: Initialize CodeQL
+              uses: github/codeql-action/init@v3
+              with:
+                language: java
+            - name: pacakge the code 
+              run: mvn clean package
+            - name: codeql analysis
+              uses: github/codeql-action/analyze@v3
+            - name: publish the test result
+              uses: EnricoMi/publish-unit-test-result-action@v2
+              with:
+                files: "**/target/surefire-reports/**/*.xml" 
+                comment_mode: always
+
