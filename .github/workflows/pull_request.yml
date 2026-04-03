@@ -6,25 +6,20 @@ on:
 jobs:
     build:
         runs-on: ubuntu-latest
-        permissions:
-          contents: read
-          checks: write
-          pull-requests: write
-          security-events: write
         steps:
-            - name: get the code
+            - name: get the code 
               uses: actions/checkout@v4
-            - name: Initialize CodeQL
+            - name: initialize codeql
               uses: github/codeql-action/init@v3
               with:
-                languages: java
-            - name: pacakge the code 
+                language: java
+            - name: package
               run: mvn clean package
-            - name: codeql analysis
+            - name: codeql analyze
               uses: github/codeql-action/analyze@v3
             - name: publish the test result
               uses: EnricoMi/publish-unit-test-result-action@v2
               with:
-                files: "**/target/surefire-reports/**/*.xml" 
-                comment_mode: always
-
+                files: "**/target/surefire-reports/*/*.xml"
+                comment_mode: always  
+                  
